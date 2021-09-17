@@ -1,0 +1,100 @@
+<p-table
+  #table
+  [columns]="columns"
+  [value]="results"
+  [paginator]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [showCurrentPageReport]="true"
+  [rows]="10"
+  [autoLayout]="true"
+>
+  <ng-template pTemplate="paginatorleft" let-state>
+    <tk-result-text
+      [resultsCount]="results ? results.length : -1"
+      [state]="state"
+    ></tk-result-text>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="text-align: center">{{ "GENERAL.ACTION" | translate }}</th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        <span class="column-title">
+          {{ col.header | translate }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </span>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-results let-columns="columns">
+    <tr [pSelectableRow]="results">
+      <td>
+        <button
+          class="p-mb-2 p-mr-2"
+          type="button"
+          icon="pi pi-pencil"
+          pButton
+          title="{{ 'GENERAL.EDIT' | translate }}"
+          [routerLink]="['/detail/edit/', results.id]"
+        ></button>
+        <button
+          class="p-mb-2 p-mr-2"
+          type="button"
+          icon="pi pi-trash"
+          pButton
+          title="{{ 'GENERAL.DELETE' | translate }}"
+          (click)="deleteDialogVisible = true; setSelectedBook(results)"
+        ></button>
+      </td>
+      <!-- <ng-container *ngFor="let col of columns">
+        <td>
+          <div *ngIf="isDateColumn(col.field); else elseif1">
+            {{ results[col.field] | date: "MMM d, y, h:mm a" }}
+          </div>
+          <ng-template #elseif1>
+            <div *ngIf="col.field === 'canceled'; else elseif2">
+              {{(results[col.field] ===  true ? 'GENERAL.YES' : 'GENERAL.NO') | translate}}
+            </div>
+          </ng-template>
+          <ng-template #elseif2>
+            <div>
+              {{
+                col.field === "table"
+                  ? getAuthorId(results[col.field])
+                  : results[col.field]
+              }}
+            </div>
+          </ng-template>
+        </td>
+      </ng-container> -->
+    </tr>
+  </ng-template>
+</p-table>
+<p-dialog
+  header="{{ 'BOOK_MENU.BOOK_DELETE' | translate }}"
+  [(visible)]="deleteDialogVisible"
+  [baseZIndex]="10000"
+>
+  <p>
+    {{ "BOOK_MENU.BOOK_DELETE.MESSAGE" | translate }}
+  </p>
+  <div><b>Id</b>: {{ getSelectedBook()?.id }}</div>
+  <div><b>Name</b>: {{ getSelectedBook()?.name }}</div>
+  <p-footer class="btn-text">
+    <button
+      type="button"
+      pButton
+      icon="pi pi-check"
+      (click)="
+        deleteEvent.emit(getSelectedBook().id); deleteDialogVisible = false
+      "
+      label="{{ ('GENERAL.YES' | translate) || true }}"
+    ></button>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      (click)="setSelectedBook(null); deleteDialogVisible = false"
+      label="{{ ('GENERAL.NO' | translate) || true }}"
+    ></button>
+  </p-footer>
+</p-dialog>

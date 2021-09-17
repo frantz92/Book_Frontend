@@ -1,0 +1,534 @@
+---
+openapi: 3.0.3
+info:
+  title: my-thai-star
+  description: my thai star example application
+  version: "1.0"
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: Book REST
+
+paths:
+  /book:
+    get:
+      tags:
+        - Book REST
+      description: Gets book by criteria
+      operationId: getBookByCriteria
+      parameters:
+        - name: bookTitle
+          in: query
+          schema:
+            type: string
+        - name: bookCategory
+          in: query
+          schema:
+            $ref: "#/components/schemas/BookCategory"
+        - name: bookPages
+          in: query
+          schema:
+            format: int32
+            type: integer
+        - name: bookIsbn
+          in: query
+          schema:
+            type: string
+        - name: authorName
+          in: query
+          schema:
+            type: string
+        - name: authorSurname
+          in: query
+          schema:
+            type: string
+        - name: authorAge
+          in: query
+          schema:
+            type: integer
+        - name: page
+          in: query
+          schema:
+            format: int32
+            default: "0"
+            minimum: 0
+            type: integer
+        - name: size
+          in: query
+          schema:
+            format: int32
+            default: "100"
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: The corresponding book resources
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResultDTO"
+    post:
+      tags:
+        - Book REST
+      description: Create the book
+      operationId: createBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookDTO"
+      responses:
+        "201":
+          description: Created book resource
+          headers:
+            Location:
+              description: URL for the create book resource
+              style: simple
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookDTO"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+  /book/{id}:
+    get:
+      tags:
+        - Book REST
+      description: Gets book by Id
+      operationId: getBookById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookDTO"
+    put:
+      tags:
+        - Book REST
+      description: Update the book
+      operationId: updateBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookDTO"
+      responses:
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: Updated book resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookDTO"
+    delete:
+      tags:
+        - Book REST
+      description: Delete book
+      operationId: deleteBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: Deleted book resource
+          content:
+            application/json: {}
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+
+  /author:
+    get:
+      tags:
+        - Author REST
+      description: Get Author by Criteria
+      operationId: getAuthorByCriteria
+      parameters:
+        - name: authorName
+          in: query
+          schema:
+            type: string
+        - name: authorSurname
+          in: query
+          schema:
+            type: string
+        - name: authorAge
+          in: query
+          schema:
+            type: integer
+        - name: page
+          in: query
+          schema:
+            format: int32
+            default: "0"
+            minimum: 0
+            type: integer
+        - name: size
+          in: query
+          schema:
+            format: int32
+            default: "100"
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: The corresponding Author resources
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PageResultDTO"
+    post:
+      tags:
+        - Author REST
+      description: Create Author
+      operationId: createAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorDTO"
+      responses:
+        "201":
+          description: Created Author resource
+          headers:
+            Location:
+              description: URL for the create Author resource
+              style: simple
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorDTO"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+  /table/{id}:
+    get:
+      tags:
+        - Author REST
+      description: Gets Author by ID
+      operationId: getAuthorById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: The corresponding Author resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorDTO"
+    put:
+      tags:
+        - Author REST
+      description: Update Author
+      operationId: updateAuthor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorDTO"
+      responses:
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "200":
+          description: Updated Author resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorDTO"
+    delete:
+      tags:
+        - Author REST
+      description: Delete Author
+      operationId: deleteAuthor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: Deleted Author by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorDTO"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RFCProblemDTO"
+components:
+  schemas:
+    RFCProblemDetailDTO:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        messageId:
+          type: string
+        messageType:
+          type: string
+    ListRFCProblemDetailDTO:
+      type: array
+      items:
+        $ref: "#/components/schemas/RFCProblemDetailDTO"
+    RFCProblemDTO:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+        problems:
+          $ref: "#/components/schemas/ListRFCProblemDetailDTO"
+        status:
+          format: int32
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    BookCategory:
+      enum:
+        - HORROR
+        - SCI_FI
+        - ROMANCE
+        - BIOGRAPHY
+        - FANTASY
+        - MYSTERY
+        - THRILLER
+        - WESTERN
+        - DYSTOPIAN
+        - CONTEMPORARY
+        - ADVENTURE
+        - PARANORMAL
+        - HISTORICAL_FICTION
+        - COOKING
+        - ART
+        - DEVELOPMENT
+        - MOTIVATIONAL
+        - HEALTH
+        - HISTORY
+        - TRAVEL
+        - GUIDE
+        - HUMOR
+        - CHILDREN
+      type: string
+    OffsetDateTime:
+      format: date-time
+      type: string
+    AuthorDTO:
+      type: object
+      properties:
+        creationDate:
+          $ref: "#/components/schemas/OffsetDateTime"
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: "#/components/schemas/OffsetDateTime"
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          type: string
+        authorName:
+          type: string
+        authorSuename:
+          type: string
+        authorAge:
+          format: int32
+          type: integer
+    BookDTO:
+      type: object
+      properties:
+        creationDate:
+          $ref: "#/components/schemas/OffsetDateTime"
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: "#/components/schemas/OffsetDateTime"
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        bookTitle:
+          type: string
+        bookCategory:
+          allOf:
+            - $ref: "#/components/schemas/BookCategory"
+        bookPages:
+          format: int32
+          type: integer
+        bookIsbn:
+          type: string
+        bookAuthor:
+          allOf:
+            - $ref: "#/components/schemas/AuthorDTO"
+    ListObject:
+      type: array
+      items:
+        type: object
+    PageResultDTO:
+      type: object
+      properties:
+        number:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        stream:
+          $ref: "#/components/schemas/ListObject"
+        totalElements:
+          format: int64
+          type: integer
+        totalPages:
+          format: int64
+          type: integer

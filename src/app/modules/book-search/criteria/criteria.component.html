@@ -1,0 +1,114 @@
+<div id="criteria">
+  <form [formGroup]="criteriaGroup">
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-3">
+        <span class="p-float-label">
+          <input
+            id="book"
+            pInputText
+            type="text"
+            [(ngModel)]="criteria.bookTitle"
+            formControlName="bookTitle"
+            appendTo="body"
+          />
+          <label for="bookTitle">
+            {{ "BOOK_MENU.BOOK_SEARCH.CRITERIA.TITLE" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <span class="p-float-label">
+          <p-dropdown
+            id="bookCategory"
+            [options]="bookCategories"
+            formControlName="bookCategory"
+            [(ngModel)]="criteria.bookCategory"
+            appendTo="body"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+          ></p-dropdown>
+          <label for="bookCategory">
+            {{ "BOOK_MENU.BOOK_SEARCH.CRITERIA.CATEGORY" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <span class="p-float-label">
+          <p-inputMask
+            id="bookIsbn"
+            [(ngModel)]="criteria.bookIsbn"
+            formControlName="bookIsbn"
+            mask="999-9-99-999999-9"
+            validateMask="true"
+          >
+          </p-inputMask>
+          <label for="bookIsbn">
+            {{ "BOOK_MENU.BOOK_SEARCH.CRITERIA.ISBN" | translate }}
+          </label>
+        </span>
+      </div>
+    </div>
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-3">
+        <span class="p-float-label">
+          <input
+            id="authorName"
+            pInputText
+            type="text"
+            [(ngModel)]="criteria.authorName"
+            formControlName="authorName"
+          />
+          <label for="authorName">
+            {{ "BOOK_MENU.BOOK_SEARCH.CRITERIA.AUTHOR_NAME" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+        <span class="p-float-label">
+          <input
+            id="authorSurame"
+            pInputText
+            type="text"
+            [(ngModel)]="criteria.authorSurname"
+            formControlName="authorSurame"
+          />
+          <label for="authorSurame">
+            {{ "BOOK_MENU.BOOK_SEARCH.CRITERIA.AUTHOR_SURNAME" | translate }}
+          </label>
+        </span>
+      </div>
+    </div>
+    <div>
+      <div class="p-d-flex">
+        <div class="p-mr-3">
+          <button
+            pButton
+            [label]="
+              ('BOOK_MENU.BOOK_SEARCH.CRITERIA.SEARCH' | translate) || true
+            "
+            [pTooltip]="
+              'BOOK_MENU.BOOK_SEARCH.CRITERIA.SEARCH_TOOLTIP' | translate
+            "
+            tooltipPosition="top"
+            (click)="submitCriteria()"
+            icon="pi pi-search"
+          ></button>
+        </div>
+        <div class="p-mr-3">
+          <button
+            pButton
+            [label]="
+              ('BOOK_MENU.BOOK_SEARCH.CRITERIA.RESET' | translate) || true
+            "
+            [pTooltip]="
+              'BOOK_MENU.BOOK_SEARCH.CRITERIA.RESET_TOOLTIP' | translate
+            "
+            tooltipPosition="top"
+            (click)="resetFormGroup()"
+            icon="pi pi-times"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

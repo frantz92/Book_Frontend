@@ -1,0 +1,925 @@
+---
+openapi: 3.0.3
+info:
+  title: my-thai-star
+  description: my thai star example application
+  version: "1.0"
+servers:
+- url: http://localhost:8080/
+tags:
+- name: Booking REST
+- name: InvitedGuest REST
+- name: Table REST
+paths:
+  /booking:
+    get:
+      tags:
+      - Booking REST
+      description: Gets bookings by criteria
+      operationId: getBookingsByCriteria
+      parameters:
+      - name: bookingDate
+        in: query
+        schema:
+          $ref: '#/components/schemas/OffsetDateTime'
+      - name: bookingName
+        in: query
+        schema:
+          type: string
+      - name: bookingType
+        in: query
+        schema:
+          $ref: '#/components/schemas/BookingType'
+      - name: canceled
+        in: query
+        schema:
+          type: boolean
+      - name: expirationDate
+        in: query
+        schema:
+          $ref: '#/components/schemas/OffsetDateTime'
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: "0"
+          minimum: 0
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: "100"
+          maximum: 100
+          minimum: 1
+          type: integer
+      - name: tableId
+        in: query
+        schema:
+          format: int64
+          type: integer
+      - name: tableSize
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: userEmail
+        in: query
+        schema:
+          type: string
+      - name: userLastName
+        in: query
+        schema:
+          type: string
+      - name: userName
+        in: query
+        schema:
+          type: string
+      - name: userToken
+        in: query
+        schema:
+          type: string
+      responses:
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: The corresponding bookings resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResultDTO'
+    post:
+      tags:
+      - Booking REST
+      description: Create the booking
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingCreateUpdateDTO'
+      responses:
+        "201":
+          description: Created booking resource
+          headers:
+            Location:
+              description: URL for the create booking resource
+              style: simple
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingDTO'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+  /booking/{id}:
+    get:
+      tags:
+      - Booking REST
+      description: Gets booking by Id
+      operationId: getBookingById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingDTO'
+    put:
+      tags:
+      - Booking REST
+      description: Update the booking
+      operationId: updateBooking
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingCreateUpdateDTO'
+      responses:
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: Updated booking resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingDTO'
+    delete:
+      tags:
+      - Booking REST
+      description: Delete booking
+      operationId: deleteBooking
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "204":
+          description: Deleted booking resource
+          content:
+            application/json: {}
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+  /invited-guest:
+    get:
+      tags:
+      - InvitedGuest REST
+      description: Get InvitedGuests by criteria
+      operationId: getInvitedGuestsByCriteria
+      parameters:
+      - name: accepted
+        in: query
+        schema:
+          type: boolean
+      - name: bookingId
+        in: query
+        schema:
+          format: int64
+          type: integer
+      - name: email
+        in: query
+        schema:
+          type: string
+      - name: guestToken
+        in: query
+        schema:
+          type: string
+      - name: orderId
+        in: query
+        schema:
+          format: int64
+          type: integer
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: "0"
+          minimum: 0
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: "100"
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: The corresponding InvitedGuests resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResultDTO'
+    post:
+      tags:
+      - InvitedGuest REST
+      description: Create InvitedGuest
+      operationId: createInvitedGuest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitedGuestCreateUpdateDTO'
+      responses:
+        "201":
+          description: Created InvitedGuest resource
+          headers:
+            Location:
+              description: URL for the create InvitedGuest resource
+              style: simple
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitedGuestDTO'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+  /invited-guest/{id}:
+    get:
+      tags:
+      - InvitedGuest REST
+      description: Get InvitedGuest by ID
+      operationId: getInvitedGuestById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: The corresponding InvitedGuest resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitedGuestDTO'
+    put:
+      tags:
+      - InvitedGuest REST
+      description: Update InvitedGuest
+      operationId: updateInvitedGuest
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitedGuestCreateUpdateDTO'
+      responses:
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: Updated InvitedGuest resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitedGuestDTO'
+    delete:
+      tags:
+      - InvitedGuest REST
+      description: Delete InvitedGuest
+      operationId: deleteInvitedGuest
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Deleted InvitedGuest resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitedGuestDTO'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+  /table:
+    get:
+      tags:
+      - Table REST
+      description: Get Tables by Criteria
+      operationId: getTablesByCriteria
+      parameters:
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: "0"
+          minimum: 0
+          type: integer
+      - name: seatsNumber
+        in: query
+        schema:
+          format: int32
+          type: integer
+      - name: size
+        in: query
+        schema:
+          format: int32
+          default: "100"
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: The corresponding Tables resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResultDTO'
+    post:
+      tags:
+      - Table REST
+      description: Create Table
+      operationId: createTable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableDTO'
+      responses:
+        "201":
+          description: Created Table resource
+          headers:
+            Location:
+              description: URL for the create Table resource
+              style: simple
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableDTO'
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+  /table/{id}:
+    get:
+      tags:
+      - Table REST
+      description: Gets Table by ID
+      operationId: getTableById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: The corresponding Table resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableDTO'
+    put:
+      tags:
+      - Table REST
+      description: Update Table
+      operationId: updateTable
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableDTO'
+      responses:
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "200":
+          description: Updated Table resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableDTO'
+    delete:
+      tags:
+      - Table REST
+      description: Delete Table
+      operationId: deleteTable
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "204":
+          description: Deleted category by ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableDTO'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+        "500":
+          description: "Internal Server Error, please check Problem Details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RFCProblemDTO'
+components:
+  schemas:
+    RFCProblemDetailDTO:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        messageId:
+          type: string
+        messageType:
+          type: string
+    ListRFCProblemDetailDTO:
+      type: array
+      items:
+        $ref: '#/components/schemas/RFCProblemDetailDTO'
+    RFCProblemDTO:
+      type: object
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+        problems:
+          $ref: '#/components/schemas/ListRFCProblemDetailDTO'
+        status:
+          format: int32
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    OffsetDateTime:
+      format: date-time
+      type: string
+    BookingType:
+      enum:
+      - COMMON
+      - INVITED
+      type: string
+    InvitedGuestDTO:
+      required:
+      - orderId
+      type: object
+      properties:
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          type: string
+        accepted:
+          description: The acceptance of invitation.
+          type: boolean
+        bookingId:
+          format: int64
+          description: The Booking id.
+          type: integer
+        email:
+          description: The email.
+          pattern: \S
+          type: string
+          nullable: false
+        guestToken:
+          description: The guest token.
+          pattern: \S
+          type: string
+          nullable: false
+        orderId:
+          format: int64
+          description: The Order id.
+          type: integer
+          nullable: false
+    ListInvitedGuestDTO:
+      type: array
+      items:
+        $ref: '#/components/schemas/InvitedGuestDTO'
+    TableDTO:
+      required:
+      - seatsNumber
+      type: object
+      properties:
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        seatsNumber:
+          format: int32
+          description: The seats number.
+          minimum: 1
+          type: integer
+          nullable: false
+    UserDTO:
+      type: object
+      properties:
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          type: string
+        email:
+          type: string
+        givenName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        token:
+          type: string
+        userId:
+          type: string
+    BookingDTO:
+      type: object
+      properties:
+        creationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        creationUser:
+          type: string
+        modificationDate:
+          $ref: '#/components/schemas/OffsetDateTime'
+        modificationUser:
+          type: string
+        version:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        assistants:
+          format: int32
+          description: Amount of assistants assigned to the booking.
+          type: integer
+        bookingDate:
+          allOf:
+          - $ref: '#/components/schemas/OffsetDateTime'
+          - description: The booking date.
+        bookingToken:
+          description: The booking token.
+          type: string
+        bookingType:
+          allOf:
+          - $ref: '#/components/schemas/BookingType'
+          - description: The booking type.
+        canceled:
+          description: The booking canceling indication.
+          type: boolean
+        comment:
+          description: The booking comment.
+          type: string
+        expirationDate:
+          allOf:
+          - $ref: '#/components/schemas/OffsetDateTime'
+          - description: The booking expiration date.
+        invitedGuests:
+          $ref: '#/components/schemas/ListInvitedGuestDTO'
+        name:
+          description: The booking name.
+          type: string
+        table:
+          allOf:
+          - $ref: '#/components/schemas/TableDTO'
+          - description: The table assigned to the booking.
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserDTO'
+          - description: The user assigned to the booking.
+    ListObject:
+      type: array
+      items:
+        type: object
+    PageResultDTO:
+      type: object
+      properties:
+        number:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        stream:
+          $ref: '#/components/schemas/ListObject'
+        totalElements:
+          format: int64
+          type: integer
+        totalPages:
+          format: int64
+          type: integer
+    InvitedGuestCreateUpdateDTO:
+      type: object
+      properties:
+        accepted:
+          description: The acceptance of invitation.
+          type: boolean
+        bookingId:
+          format: int64
+          description: The Booking id.
+          type: integer
+        email:
+          description: The email.
+          pattern: \S
+          type: string
+          nullable: false
+        guestToken:
+          description: The guest token.
+          pattern: \S
+          type: string
+          nullable: false
+        id:
+          description: id
+          type: string
+        orderId:
+          format: int64
+          description: The Order id.
+          type: integer
+    ListInvitedGuestCreateUpdateDTO:
+      type: array
+      items:
+        $ref: '#/components/schemas/InvitedGuestCreateUpdateDTO'
+    UserCreateUpdateDTO:
+      type: object
+      properties:
+        email:
+          description: The User email.
+          type: string
+        givenName:
+          description: The User name.
+          type: string
+        id:
+          description: id
+          type: string
+        lastName:
+          description: The User lastname.
+          type: string
+        phoneNumber:
+          description: The User phone number.
+          type: string
+        token:
+          description: The User token.
+          type: string
+        userId:
+          description: The userID
+          type: string
+    BookingCreateUpdateDTO:
+      required:
+      - bookingDate
+      - bookingType
+      - expirationDate
+      - tableId
+      - user
+      type: object
+      properties:
+        assistants:
+          format: int32
+          description: Amount of assistants assigned to the booking.
+          type: integer
+        bookingDate:
+          allOf:
+          - $ref: '#/components/schemas/OffsetDateTime'
+          - description: The booking date.
+            nullable: false
+        bookingToken:
+          description: The booking token.
+          pattern: \S
+          type: string
+          nullable: false
+        bookingType:
+          allOf:
+          - $ref: '#/components/schemas/BookingType'
+          - description: The booking type.
+            nullable: false
+        canceled:
+          description: The booking canceling indication.
+          type: boolean
+        comment:
+          description: The booking comment.
+          type: string
+        expirationDate:
+          allOf:
+          - $ref: '#/components/schemas/OffsetDateTime'
+          - description: The booking expiration date.
+            nullable: false
+        invitedGuests:
+          $ref: '#/components/schemas/ListInvitedGuestCreateUpdateDTO'
+        name:
+          description: The booking name.
+          pattern: \S
+          type: string
+          nullable: false
+        tableId:
+          format: int64
+          description: The id of the table assigned to the booking.
+          type: integer
+          nullable: false
+        user:
+          allOf:
+          - $ref: '#/components/schemas/UserCreateUpdateDTO'
+          - description: The user assigned to the booking.
+            nullable: false

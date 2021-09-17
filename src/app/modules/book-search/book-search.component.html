@@ -1,0 +1,25 @@
+<ng-template #leftToolbar>
+  <tk-toolbar-item
+    title="{{ 'BOOK_MENU.BOOK_SEARCH.BOOK_CREATE_EDIT.CREATE_BOOK' | translate }}"
+    icon="plus"
+    [routerLink]="['/detail/create']"
+  ></tk-toolbar-item>
+</ng-template>
+<tk-portal-search-page
+  pageName="book-search"
+  [leftToolbar]="leftToolbar"
+  header="Book Search"
+  (onSearch)="search()"
+>
+  <app-criteria
+    criteria
+    [criteria]="criteria"
+    (criteriaSubmitted)="submitCriteria($event)"
+    (resetEmitter)="resetEmitted()"
+  >
+  </app-criteria>
+  <app-results
+    (deleteEvent)="deleteBook($event)"
+    [results]="results"
+  ></app-results>
+</tk-portal-search-page>
