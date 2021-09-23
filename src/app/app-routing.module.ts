@@ -13,21 +13,20 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => BookSearchModule,
   },
-  // ,
-  // {
-  //   path: 'detail',
-  //   loadChildren: () =>
-  //     import('src/app/modules/book-detail/book-detail.module').then(
-  //       (m) => m.BookDetailModule
-  //     )
-  // },
-  // {
-  //   path: 'table',
-  //   loadChildren: () =>
-  //     import('src/app/modules/table-detail/table-detail.module').then(
-  //       (m) => m.TableDetailModule
-  //     )
-  // }
+  {
+    path: 'detail',
+    loadChildren: () =>
+      import('src/app/modules/book-detail/book-detail.module').then(
+        (m) => m.BookDetailModule
+      ),
+  },
+  {
+    path: 'author',
+    loadChildren: () =>
+      import('src/app/modules/author-detail/author-detail.module').then(
+        (m) => m.AuthorDetailModule
+      ),
+  },
 ];
 
 @NgModule({

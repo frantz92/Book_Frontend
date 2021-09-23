@@ -476,7 +476,7 @@ components:
           type: string
         authorName:
           type: string
-        authorSuename:
+        authorSurname:
           type: string
         authorAge:
           format: int32

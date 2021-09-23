@@ -1,0 +1,48 @@
+<div id="document-specification-form">
+  <form [formGroup]="authorForm">
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input
+            id="authorSurname"
+            pInputText
+            type="text"
+            formControlName="authorSurname"
+            name="authorSurname"
+          />
+          <label class="required" for="authorSurname">
+            {{ jsonTranslatePrefix + "HEADER.SURNAME" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input
+            id="authorName"
+            pInputText
+            type="text"
+            formControlName="authorName"
+            name="authorName"
+          />
+          <label class="required" for="authorName">
+            {{ jsonTranslatePrefix + "HEADER.NAME" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <p-inputNumber
+            id="authorAge"
+            formControlName="authorAge"
+            min="1"
+            max="99"
+            [showButtons]="true"
+          ></p-inputNumber>
+          <label for="authorAge">
+            {{ jsonTranslatePrefix + "HEADER.AGE" | translate }}
+          </label>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>

@@ -43,20 +43,14 @@ export class BookSearchComponent
       .get([
         'BOOK_MENU.BOOK_DELETE.BOOK_DELETE_SUCESS',
         'BOOK_MENU.BOOK_DELETE.BOOK_DELETE_ERROR',
-        'BOOK_MENU.BOOK_SEARCH.BOOK_CREATE_EDIT.CREATE_BOOK',
+        'BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK',
       ])
       .subscribe((data) => {
         this.translatedData = data;
         this.breadCrumbService.setItems([
           {
-            title:
-              this.translatedData[
-                'BOOK_MENU.BOOK_SEARCH.BOOK_CREATE_EDIT.CREATE_BOOK'
-              ],
-            label:
-              this.translatedData[
-                'BOOK_MENU.BOOK_SEARCH.BOOK_CREATE_EDIT.CREATE_BOOK'
-              ],
+            title: this.translatedData['BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK'],
+            label: this.translatedData['BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK'],
           },
         ]);
       });

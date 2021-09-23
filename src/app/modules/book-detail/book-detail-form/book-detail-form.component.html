@@ -1,0 +1,78 @@
+<form [formGroup]="editCreateFormGroup">
+  <p-tabView>
+    <div class="p-fluid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input
+            id="bookTitle"
+            pInputText
+            type="text"
+            formControlName="bookTitle"
+            name="bookTitle"
+          />
+          <label class="required" for="bookTitle">
+            {{ jsonTranslatePrefix + "TITLE" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <p-inputMask
+            id="bookIsbn"
+            formControlName="bookIsbn"
+            name="bookIsbn"
+            mask="999-9-99-999999-9"
+            validateMask="true"
+          >
+          </p-inputMask>
+          <label class="required" for="bookIsbn">
+            {{ jsonTranslatePrefix + "ISBN" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <p-inputNumber
+            id="bookPages"
+            min="0"
+            formControlName="bookPages"
+            [showButtons]="true"
+          ></p-inputNumber>
+          <label for="bookPages">
+            {{ jsonTranslatePrefix + "PAGES" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <p-dropdown
+            id="bookCategory"
+            [options]="bookCategories"
+            appendTo="body"
+            formControlName="bookCategory"
+            name="bookCategory"
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+          ></p-dropdown>
+          <label class="required" for="bookCategory">
+            {{ jsonTranslatePrefix + "CATEGORY" | translate }}
+          </label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input
+            id="authorSurname"
+            pInputText
+            type="text"
+            formControlName="authorSurname"
+            name="authorSurname"
+          />
+          <label for="authorSurname">
+            {{ jsonTranslatePrefix + "AUTHOR_SURNAME" | translate }}
+          </label>
+        </span>
+      </div>
+    </div>
+  </p-tabView>
+</form>

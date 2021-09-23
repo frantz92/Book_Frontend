@@ -1,0 +1,21 @@
+<ng-template #leftToolbar>
+  <tk-toolbar-item
+    title="{{ 'GENERAL.CLOSE' | translate }}"
+    icon="times"
+    routerLink="/search"
+  ></tk-toolbar-item>
+
+  <tk-toolbar-item
+    title="{{ 'GENERAL.CREATE' | translate }}"
+    icon="save"
+    (click)="this.bookDetailFormComponent.emitForm()"
+  ></tk-toolbar-item>
+</ng-template>
+<tk-portal-page
+  [header]="'BOOK_MENU.BOOK_CREATE_EDIT.CREATE_BOOK' | translate"
+  [leftToolbar]="leftToolbar"
+>
+  <app-book-detail-form
+    (formSubmitted)="onSubmit($event)"
+  ></app-book-detail-form>
+</tk-portal-page>

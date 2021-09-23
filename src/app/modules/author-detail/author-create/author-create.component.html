@@ -1,0 +1,22 @@
+<ng-template #leftToolbar>
+  <tk-toolbar-item
+    title="{{ 'GENERAL.CLOSE' | translate }}"
+    icon="times"
+    routerLink="/author"
+  ></tk-toolbar-item>
+
+  <tk-toolbar-item
+    title="{{ 'GENERAL.CREATE' | translate }}"
+    icon="save"
+    (click)="this.authorDetailFormComponent.emitForm()"
+  ></tk-toolbar-item>
+</ng-template>
+
+<tk-portal-page
+  [header]="'AUTHOR_MENU.AUTHOR_CREATE_EDIT.CREATE' | translate"
+  [leftToolbar]="leftToolbar"
+>
+  <app-author-detail-form
+    (formSubmitted)="onSubmit($event)"
+  ></app-author-detail-form>
+</tk-portal-page>

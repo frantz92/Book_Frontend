@@ -1,0 +1,96 @@
+<ng-template #leftToolbar>
+  <tk-toolbar-item
+    title="{{ 'GENERAL.CREATE' | translate }}"
+    icon="plus"
+    routerLink="/author/create"
+  ></tk-toolbar-item>
+</ng-template>
+
+<tk-portal-page [leftToolbar]="leftToolbar">
+  <p-table
+    [columns]="columns"
+    [value]="results"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [autoLayout]="true"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="paginatorleft" let-state>
+      <tk-result-text
+        [resultsCount]="results ? results.length : -1"
+        [state]="state"
+      ></tk-result-text>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>{{ "GENERAL.ACTION" | translate }}</th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          <span class="column-title">
+            {{ col.header | translate }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </span>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-results let-columns="columns">
+      <tr [pSelectableRow]="results">
+        <td>
+          <button
+            class="p-mb-2 p-mr-2"
+            type="button"
+            icon="pi pi-pencil"
+            pButton
+            title="{{ 'GENERAL.EDIT' | translate }}"
+            [routerLink]="['/author/edit/', results.id]"
+          ></button>
+          <button
+            class="p-mb-2 p-mr-2"
+            type="button"
+            icon="pi pi-trash"
+            pButton
+            title="{{ 'GENERAL.DELETE' | translate }}"
+            (click)="deleteDialogVisible = true; setSelectedAuthor(results)"
+          ></button>
+        </td>
+        <td *ngFor="let col of columns">
+          <div>
+            {{ results[col.field] }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</tk-portal-page>
+<p-dialog
+  header="{{ 'AUTHOR_MENU.DELETE.DELETE_HEADER' | translate }}"
+  [(visible)]="deleteDialogVisible"
+  [baseZIndex]="10000"
+>
+  <p>
+    {{ "AUTHOR_MENU.DELETE.MESSAGE" | translate }}
+  </p>
+  <div><b>Id</b>: {{ getSelectedAuthor()?.id }}</div>
+  <div>
+    <b>{{ "AUTHOR_MENU.HEADER.AUTHOR_SURNAME" | translate }}</b
+    >: {{ getSelectedAuthor()?.authorSurname }}
+  </div>
+  <p-footer class="btn-text">
+    <!-- <button
+      type="button"
+      pButton
+      icon="pi pi-check"
+      (click)="
+        deleteAuthor(getSelectedAuthor().id); deleteDialogVisible = false
+      "
+      label="{{ ('GENERAL.YES' | translate) || true }}"
+    ></button> -->
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      (click)="setSelectedAuthor(null); deleteDialogVisible = false"
+      label="{{ ('GENERAL.NO' | translate) || true }}"
+    ></button>
+  </p-footer>
+</p-dialog>

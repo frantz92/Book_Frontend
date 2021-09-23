@@ -16,8 +16,7 @@ export class ResultsComponent {
 
   public deleteDialogVisible = false;
   public selectedBook = null;
-  public readonly pathToTranslationJSON =
-    'BOOK_MENU.BOOK_SEARCH.AUTHOR.HEADER.';
+  public readonly pathToTranslationJSON = 'AUTHOR_MENU.HEADER.';
 
   public columns: Column[] = [
     {
