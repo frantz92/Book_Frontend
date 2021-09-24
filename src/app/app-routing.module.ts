@@ -6,15 +6,15 @@ import { BookSearchModule } from './modules/book-search/book-search.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/search',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
   {
-    path: 'search',
+    path: 'home',
     loadChildren: () => BookSearchModule,
   },
   {
-    path: 'detail',
+    path: 'book',
     loadChildren: () =>
       import('src/app/modules/book-detail/book-detail.module').then(
         (m) => m.BookDetailModule

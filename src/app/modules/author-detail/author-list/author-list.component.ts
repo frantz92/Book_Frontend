@@ -28,12 +28,12 @@ export class AuthorListComponent implements OnInit {
   public columns: Column[] = [
     {
       field: 'authorSurname',
-      header: 'AUTHOR_MENU.HEADER.SURNAME',
+      header: 'AUTHOR.FORM.SURNAME',
       type: ColumnType.INPUT,
     },
     {
       field: 'authorName',
-      header: 'AUTHOR_MENU.HEADER.NAME',
+      header: 'AUTHOR.FORM.NAME',
       type: ColumnType.INPUT,
     },
   ];
@@ -50,16 +50,16 @@ export class AuthorListComponent implements OnInit {
   ngOnInit(): void {
     this.translateService
       .get([
-        'AUTHOR_MENU.DELETE.SUCCESS',
-        'TABLE_MENU.DELETE.ERROR',
-        'AUTHOR_MENU.HEADER.LIST',
+        'AUTHOR.DELETE.SUCCESS',
+        'AUTHOR.DELETE.ERROR',
+        'AUTHOR.LIST.HEADER',
       ])
       .subscribe((data) => {
         this.translatedData = data;
         this.breadCrumbService.setItems([
           {
-            title: this.translatedData['AUTHOR_MENU.HEADER.LIST'],
-            label: this.translatedData['AUTHOR_MENU.HEADER.LIST'],
+            title: this.translatedData['AUTHOR.LIST.HEADER'],
+            label: this.translatedData['AUTHOR.LIST.HEADER'],
           },
         ]);
       });
@@ -79,14 +79,14 @@ export class AuthorListComponent implements OnInit {
       () => {
         this.messageService.add({
           severity: 'success',
-          summary: this.translatedData['AUTHOR_MENU.DELETE.SUCCESS'],
+          summary: this.translatedData['AUTHOR.DELETE.SUCCESS'],
         });
         this.loadData();
       },
       () => {
         this.messageService.add({
           severity: 'error',
-          summary: this.translatedData['AUTHOR_MENU.DELETE.ERROR'],
+          summary: this.translatedData['AUTHOR.DELETE.ERROR'],
         });
       }
     );

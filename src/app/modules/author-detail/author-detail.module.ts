@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthorDetailRoutingModule } from './author-detail-routing.module';
 import { AuthorCreateComponent } from './author-create/author-create.component';
 import { AuthorDetailFormComponent } from './author-detail-form/author-detail-form.component';
-//import { AuthorEditComponent } from './author-edit/author-edit.component';
+import { AuthorEditComponent } from './author-edit/author-edit.component';
 import { AuthorListComponent } from './author-list/author-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { ConfigurationService, TkitPortalModule } from 'portal-lib';
   declarations: [
     AuthorCreateComponent,
     AuthorDetailFormComponent,
-    //AuthorEditComponent,
+    AuthorEditComponent,
     AuthorListComponent,
   ],
   imports: [CommonModule, AuthorDetailRoutingModule, SharedModule],

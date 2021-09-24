@@ -2,73 +2,77 @@
   "GENERAL": {
     "YES": "Yes",
     "NO": "No",
-    "ACTION": "Action",
     "CREATE": "Create",
-    "SAVE": "Save",
-    "EDIT": "Edit",
     "CLOSE": "Close",
+    "EDIT": "Edit",
+    "SAVE": "Save",
     "DELETE": "Delete",
-    "PLEASE_SELECT": "Please Select"
+    "ACTION": "Action"
   },
-  "BOOK_MENU": {
-    "HEADER": {
+  "BOOK": {
+    "FORM": {
+      "INVALID": "Book form is invalid.",
       "TITLE": "Book title",
       "ISBN": "Book ISBN",
       "PAGES": "Book pages",
       "CATEGORY": "Book category",
-      "AUTHOR_NAME": "Author name",
-      "AUTHOR_SURNAME": "Author surname",
-      "AUTHOR_AGE": "Author age"
+      "AUTHOR_SURNAME": "Author surname"
     },
-    "BOOK_SEARCH": {
-      "SEARCH_BOOK": "Find a book",
+    "SEARCH": {
+      "HEADER": "Find a book",
       "CRITERIA": {
-        "SEARCH": "Search",
-        "SEARCH_TOOLTIP": "Search for books with provided criteria",
-        "RESET": "Reset",
-        "RESET_TOOLTIP": "Clear criteria values",
-        "INVALID": "There is a wrong criteria value"
-      }
+        "TITLE": "Book title",
+        "ISBN": "Book ISBN",
+        "CATEGORY": "Book category",
+        "AUTHOR_NAME": "Author name",
+        "AUTHOR_SURNAME": "Author surname"
+      },
+      "SEARCH_BTN": "Search",
+      "SEARCH_BTN_TOOLTIP": "Search with provided criteria",
+      "RESET_BTN": "Reset",
+      "RESET_BTN_TOOLTIP": "Clear criteria values",
+      "INVALID": "There is a wrong criteria value"
     },
-    "BOOK_CREATE_EDIT": {
-      "EDIT_BOOK": "Edit book",
-      "CREATE_BOOK": "Create a book",
-      "SUBMIT": "Submit",
-      "SUBMIT_TOOLTIP": "Submit editing book with given data",
-      "CANCEL": "Cancel",
-      "CANCEL_TOOLTIP": "Cancel editing book.",
-      "EDIT_SUCCESS": "Book was successfully updated.",
-      "EDIT_ERROR": "Book was not updated.",
-      "CREATION_SUCCESS": "Book was successfully created.",
-      "CREATION_ERROR": "Book was not created.",
-      "FORM_INVALID": "Book form is invalid.",
-      "BOOK_DETAILS": "Book Details"
+    "CREATE": {
+      "HEADER": "Create a book",
+      "SUCCESS": "The book was successfully created.",
+      "ERROR": "Error, the book was not created."
     },
-    "BOOK_DELETE": {
-      "DELETE_BOOK": "Delete a book",
-      "MESSAGE": "Are you sure that you want to delete this book?",
-      "BOOK_DELETE_SUCESS": "The book was sucessfully deleted.",
-      "BOOK_DELETE_ERROR": "Error, the book could not be deleted."
+    "EDIT": {
+      "HEADER": "Edit a book",
+      "SUCCESS": "Book was successfully updated.",
+      "ERROR": "Book was not updated."
+    },
+    "DELETE": {
+      "HEADER": "Delete a book",
+      "SUCESS": "The book was sucessfully deleted.",
+      "ERROR": "Error, the book could not be deleted.",
+      "MESSAGE": "Are you sure that you want to delete this book?"
     }
   },
-  "AUTHOR_MENU": {
-    "HEADER": {
+  "AUTHOR": {
+    "FORM": {
       "NAME": "Author name",
       "SURNAME": "Author surname",
       "AGE": "Author age",
-      "LIST": "Authors"
+      "INVALID": "Author form is invalid."
     },
-    "AUTHOR_CREATE_EDIT": {
-      "CREATE": "Create author",
-      "EDIT": "Edit author",
-      "CREATE_SUCCESS": "The author was sucessfully created.",
-      "CREATE_ERROR": "Error, the author could not be created.",
-      "FORM_INVALID": "Author form is invalid.",
-      "AUTHOR_DETAILS": "Author Details"
+    "CREATE": {
+      "HEADER": "Create author",
+      "SUCCESS": "The author was sucessfully created.",
+      "ERROR": "Error, the author could not be created."
+    },
+    "EDIT": {
+      "HEADER": "Edit author",
+      "SUCCESS": "The author was sucessfully edited.",
+      "ERROR": "Error, the author could not be edited."
     },
     "DELETE": {
-      "SUCESS": "The author was sucessfully deleted.",
-      "ERROR": "Error, the author could not be deleted."
+      "HEADER": "Delete an author",
+      "MESSAGE": "Are you sure that you want to delete this author?"
+    },
+    "LIST": {
+      "HEADER": "Authors"
     }
   }
 }

@@ -40,17 +40,13 @@ export class BookSearchComponent
   ngOnInit(): void {
     this.criteria = this.getDefaultCriteria();
     this.translateService
-      .get([
-        'BOOK_MENU.BOOK_DELETE.BOOK_DELETE_SUCESS',
-        'BOOK_MENU.BOOK_DELETE.BOOK_DELETE_ERROR',
-        'BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK',
-      ])
+      .get(['BOOK.DELETE.SUCCESS', 'BOOK.DELETE.ERROR', 'BOOK.SEARCH.HEADER'])
       .subscribe((data) => {
         this.translatedData = data;
         this.breadCrumbService.setItems([
           {
-            title: this.translatedData['BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK'],
-            label: this.translatedData['BOOK_MENU.BOOK_SEARCH.SEARCH_BOOK'],
+            title: this.translatedData['BOOK.SEARCH.HEADER'],
+            label: this.translatedData['BOOK.SEARCH.HEADER'],
           },
         ]);
       });
@@ -85,16 +81,14 @@ export class BookSearchComponent
       () => {
         this.messageService.add({
           severity: 'success',
-          summary:
-            this.translatedData['BOOK_MENU.BOOK_DELETE.BOOK_DELETE_SUCESS'],
+          summary: this.translatedData['BOOK.DELETE.SUCCESS'],
         });
         this.search();
       },
       () => {
         this.messageService.add({
           severity: 'error',
-          summary:
-            this.translatedData['BOOK_MENU.BOOK_DELETE.BOOK_DELETE_ERROR'],
+          summary: this.translatedData['BOOK.DELETE.ERROR'],
         });
       }
     );

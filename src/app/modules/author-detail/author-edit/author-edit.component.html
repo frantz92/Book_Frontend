@@ -2,21 +2,16 @@
   <tk-toolbar-item
     title="{{ 'GENERAL.CLOSE' | translate }}"
     icon="times"
-    routerLink="/home"
+    routerLink="/author"
   ></tk-toolbar-item>
-
   <tk-toolbar-item
     title="{{ 'GENERAL.CREATE' | translate }}"
     icon="save"
-    (click)="this.bookDetailFormComponent.emitForm()"
+    (click)="authorDetailFormComponent.emitForm()"
   ></tk-toolbar-item>
 </ng-template>
-
-<tk-portal-page
-  [header]="'BOOK.CREATE.HEADER' | translate"
-  [leftToolbar]="leftToolbar"
->
-  <app-book-detail-form
-    (formSubmitted)="onSubmit($event)"
-  ></app-book-detail-form>
+<tk-portal-page [leftToolbar]="leftToolbar">
+  <app-author-detail-form
+    (formSubmitted)="onSumbit($event)"
+  ></app-author-detail-form>
 </tk-portal-page>

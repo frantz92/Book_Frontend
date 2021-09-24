@@ -1,110 +1,82 @@
 {
   "GENERAL": {
-    "YES": "Yes",
-    "NO": "No",
-    "ACTION": "Action",
+    // "YES": "Yes",
+    // "NO": "No",
+    // "ACTION": "Action",
     "CREATE": "Create",
-    "SAVE": "Save",
-    "EDIT": "Edit",
-    "CLOSE": "Close",
-    "DELETE": "Delete",
-    "PLEASE_SELECT": "Please Select"
+    // "SAVE": "Save",
+    // "EDIT": "Edit",
+    "CLOSE": "Close"
+    // "DELETE": "Delete",
+    // "PLEASE_SELECT": "Please Select"
   },
-  "BOOK_MENU": {
-    "BOOK_SEARCH": {
+  "BOOK": {
+    "FORM": {
+      // "TITLE": "Book title",
+      // "ISBN": "Book ISBN",
+      // "PAGES": "Book pages",
+      // "CATEGORY": "Book category",
+      // "AUTHOR_NAME": "Author name",
+      // "AUTHOR_SURNAME": "Author surname",
+      // "AUTHOR_AGE": "Author age"
+    },
+    "SEARCH": {
+      "HEADER": "Find a book",
       "CRITERIA": {
-        "TITLE": "Book title",
-        "ISBN": "Book ISBN",
-        "PAGES": "Book pages",
-        "CATEGORY": "Book category",
-        "AUTHOR_NAME": "Author name",
-        "AUTHOR_SURNAME": "Author surname",
-        "AUTHOR_AGE": "Author age",
-        "SEARCH": "Search",
-        "SEARCH_TOOLTIP": "Search for books with provided criteria",
-        "RESET": "Reset",
-        "RESET_TOOLTIP": "Clear criteria values",
-        "INVALID": "There is a wrong criteria value"
-      },
-
-      "TABLE": {
-        "HEADER": {
-          "NAME": "Name",
-          "BOOKING_DATE": "Reservierungsdatum",
-          "EXPIRATION_DATE": "Verfallsdatum",
-          "BOOKING_TYPE": "Typ",
-          "TABLE_ID": "Tisch-ID",
-          "CANCELED": "Ist abgesagt?",
-          "ASSISTANTS": "Anzahl von Assistenten",
-          "COMMENT": "Kommentar"
-        }
-      },
-      "ERROR": {
-        "NO_DATA": "No data"
+        // "SEARCH": "Search",
+        // "SEARCH_TOOLTIP": "Search for books with provided criteria",
+        // "RESET": "Reset",
+        // "RESET_TOOLTIP": "Clear criteria values",
+        // "INVALID": "There is a wrong criteria value"
       }
     },
-    "BOOKING_CREATE_EDIT": {
-      "EDIT_BOOKING": "Reservierung-Aktualisierung",
-      "CREATE_BOOKING": "Reservierung-Erstellung",
-      "NAME": "Name",
-      "TABLE_ID": "Tisch-ID",
-      "TABLE_SIZE": "Tischgröse",
-      "CANCELED": "Abgesagt",
-      "BOOKING_TYPE": "Typ",
-      "BOOKING_DATE": "Reservierungsdatum",
-      "EXPIRATION_DATE": "Verfallsdatum",
-      "ASSISTANTS": "Anzahl von Assistenten",
-      "TOKEN": "Token",
-      "USER": "Benutzer-ID",
-      "INVITED_GUESTS": "Eingeladene Gäste",
-      "COMMENT": "Kommentar",
-      "SUBMIT": "Aktualisieren",
-      "SUBMIT_TOOLTIP": "Aktualisieren einer Reservierung mit den vorgegeben Daten",
-      "CANCEL": "Abbrechen",
-      "CANCEL_TOOLTIP": "Reservierungs bearbeiten abbrechen",
-      "BREADCRUMB": "Reservierung bearbeiten",
-      "EDIT_SUCCESS": "Reservierung wurde erfolgreich aktualisiert.",
-      "EDIT_ERROR": "Reservierung wurde nicht aktualisiert.",
-      "CREATION_SUCCESS": "Reservierung wurde erfolgreich erstellt.",
-      "CREATION_ERROR": "Reservierung wurde nicht erstellt.",
-      "FORM_INVALID": "Reservierungsformular ist ungültig",
-      "BOOKING_DETAILS": "Reservierung-Details"
-    },
-    "BOOKING_DELETE": {
-      "DELETE_BOOKING": "Löschen eine Reservierung",
-      "MESSAGE": "Sind Sie sicher, dass Sie diese Reservierung löschen möchten?",
-      "BOOKING_DELETE_SUCESS": "Die Reservierung wurde erfolgreich gelöscht.",
-      "BOOKING_DELETE_ERROR": "Fehler, die Reservierung konnte nicht gelöscht werden."
-    },
-    "GUESTS": {
-      "GUEST_TOKEN": "Gast-Token",
-      "EMAIL": "Email",
-      "ACCEPTED": "Bestätigt",
-      "ORDER_ID": "Bestellung-Id"
-    },
-    "BREADCRUMB": "Reservierungsmanagement"
-  },
-  "TABLE_MENU": {
-    "HEADERS": {
-      "CREATE": "Tisch-Erstellung",
-      "EDIT": "Tisch-Bearbeitung",
-      "LIST": "Tisch"
-    },
-    "SEATS_NUMBER": "Sitzplatznummer",
-    "FORM_INVALID": "Tischformular ist ungültig.",
     "CREATE": {
-      "CREATE_SUCCESS": "Der Tisch wurde erfolgreich erstellen.",
-      "CREATE_ERROR": "Fehler, der Tisch konnte nicht erstellen werden."
+      "HEADER": "Create a book"
+      // "SUCCESS": "Book was successfully created.",
+      // "ERROR": "Book was not created.",
+      // "SUBMIT": "Submit",
+      // "SUBMIT_TOOLTIP": "Submit editing book with given data",
+      // "CANCEL": "Cancel",
+      // "CANCEL_TOOLTIP": "Cancel editing book.",
+      // "CREATION_SUCCESS": "Book was successfully created.",
+      // "CREATION_ERROR": "Book was not created.",
+      // "FORM_INVALID": "Book form is invalid.",
+      // "BOOK_DETAILS": "Book Details"
     },
     "EDIT": {
-      "UPDATE_SUCCESS": "Der Tisch wurde erfolgreich aktualisieren.",
-      "UPDATE_ERROR": "Fehler, der Tisch konnte nicht aktualisieren werden."
+      // "HEADER": "Edit a book",
+      // "SUCCESS": "Book was successfully updated.",
+      // "ERROR": "Book was not updated."
     },
     "DELETE": {
-      "DELETE_HEADER": "Löschen einen Tisch",
-      "MESSAGE": "Sind Sie sicher, dass Sie dieser Tisch löschen möchten?",
-      "DELETE_SUCCESS": "Der Tisch wurde erfolgreich gelöscht.",
-      "DELETE_ERROR": "Fehler, der Tisch konnte nicht gelöscht werden."
+      // "HEADER": "Delete a book",
+      // "MESSAGE": "Are you sure that you want to delete this book?",
+      // "SUCESS": "The book was sucessfully deleted.",
+      // "ERROR": "Error, the book could not be deleted."
+    }
+  },
+  "AUTHOR": {
+    "HEADER": {
+      // "NAME": "Author name",
+      // "SURNAME": "Author surname",
+      // "AGE": "Author age",
+      // "LIST": "Authors"
+    },
+    "CREATE": {
+      // "HEADER": "Create author",
+      // "SUCCESS": "The author was sucessfully created.",
+      // "ERROR": "Error, the author could not be created.",
+      // "FORM_INVALID": "Author form is invalid.",
+      // "AUTHOR_DETAILS": "Author Details"
+    },
+    "EDIT": {
+      // "HEADER": "Edit author",
+      // "SUCCESS": "The author was sucessfully edited.",
+      // "ERROR": "Error, the author could not be edited."
+    },
+    "DELETE": {
+      // "SUCESS": "The author was sucessfully deleted.",
+      // "ERROR": "Error, the author could not be deleted."
     }
   }
 }

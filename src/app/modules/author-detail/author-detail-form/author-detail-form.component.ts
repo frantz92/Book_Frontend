@@ -12,7 +12,7 @@ import { AuthorDTO, AuthorRESTAPIService } from '../../../generated';
 })
 export class AuthorDetailFormComponent implements OnInit {
   @Output()
-  public jsonTranslatePrefix = 'AUTHOR_MENU.';
+  public jsonTranslatePrefix = 'AUTHOR.FORM.';
   public formSubmitted: EventEmitter<AuthorDTO> = new EventEmitter();
   public authorForm: FormGroup;
   public authorId: number;
@@ -36,7 +36,7 @@ export class AuthorDetailFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateService
-      .get(['AUTHOR_MENU.AUTHOR_CREATE_EDIT.FORM_INVALID'])
+      .get(['AUTHOR.FORM.INVALID'])
       .subscribe((data) => {
         this.translatedData = data;
       });
@@ -53,7 +53,7 @@ export class AuthorDetailFormComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary:
-          this.translatedData['BOOK_MENU.AUTHOR_CREATE_EDIT.FORM_INVALID'],
+          this.translatedData['AUTHOR.FORM.INVALID'],
       });
     }
   }

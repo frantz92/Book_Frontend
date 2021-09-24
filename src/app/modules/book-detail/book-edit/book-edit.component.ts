@@ -1,54 +1,65 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'portal-lib';
-import { MessageService } from 'primeng/api';
-import { BookDTO, BookRESTAPIService } from '../../../generated';
 import { BookDetailFormComponent } from '../book-detail-form/book-detail-form.component';
+import {
+  BookDTO,
+  BookRESTAPIService,
+  UpdateBookRequestParams,
+} from '../../../generated';
+import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-book-create',
-  templateUrl: './book-create.component.html',
-  styleUrls: ['./book-create.component.css'],
+  selector: 'app-book-edit',
+  templateUrl: './book-edit.component.html',
+  styleUrls: ['./book-edit.component.css'],
 })
-export class BookCreateComponent implements OnInit {
+export class BookEditComponent implements OnInit {
   @ViewChild(BookDetailFormComponent, { static: false })
   bookDetailFormComponent: BookDetailFormComponent;
-  public helpArticleId = 'PAGE_BOOK_CREATE';
+  public bookToEditId: number;
+  public helpArticleId = 'PAGE_BOOK_EDIT';
   public translatedData: Record<string, string>;
 
   constructor(
     private readonly translateService: TranslateService,
     private readonly breadCrumbService: BreadcrumbService,
-    private readonly bookRESTAPIService: BookRESTAPIService,
+    private readonly bookRestApi: BookRESTAPIService,
+    private readonly route: ActivatedRoute,
     private readonly messageService: MessageService
   ) {}
 
   public ngOnInit(): void {
+    this.bookToEditId = Number(this.route.snapshot.paramMap.get('id'));
     this.translateService
-      .get(['BOOK.CREATE.SUCCESS', 'BOOK.CREATE.ERROR', 'BOOK.CREATE.HEADER'])
+      .get(['BOOK.EDIT.SUCCESS', 'BOOK.EDIT.ERROR', 'BOOK.EDIT.HEADER'])
       .subscribe((data) => {
         this.translatedData = data;
         this.breadCrumbService.setItems([
           {
-            title: this.translatedData['BOOK.CREATE.HEADER'],
-            label: this.translatedData['BOOK.CREATE.HEADER'],
+            title: this.translatedData['BOOK.EDIT.HEADER'],
+            label: this.translatedData['BOOK.EDIT.HEADER'],
           },
         ]);
       });
   }
-
   public onSubmit(bookDTO: BookDTO): void {
-    this.bookRESTAPIService.createBook({ bookDTO }).subscribe(
+    const params: UpdateBookRequestParams = {
+      id: this.bookToEditId,
+      bookDTO,
+    };
+    this.bookRestApi.updateBook(params).subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
-          summary: this.translatedData['BOOK.CREATE.SUCCESS'],
+          summary: this.translatedData['BOOK.EDIT.SUCCESS'],
         });
       },
       () => {
         this.messageService.add({
           severity: 'error',
-          summary: this.translatedData['BOOK.CREATE.ERROR'],
+          summary: this.translatedData['BOOK.EDIT.ERROR'],
         });
       }
     );

@@ -7,11 +7,11 @@
 // import { MessageService } from 'primeng/api';
 // import { TranslateServiceMock } from 'src/app/test/TranslateServiceMock';
 
-// import { TableListComponent } from './table-list.component';
+// import { TableEditComponent } from './table-edit.component';
 
-// describe('TableListComponent', () => {
-//   let component: TableListComponent;
-//   let fixture: ComponentFixture<TableListComponent>;
+// describe('TableEditComponent', () => {
+//   let component: TableEditComponent;
+//   let fixture: ComponentFixture<TableEditComponent>;
 
 //   @Pipe({ name: 'translate' })
 //   class TranslatePipeMock implements PipeTransform {
@@ -23,7 +23,7 @@
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
 //       imports: [ HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule ],
-//       declarations: [ TableListComponent, TranslatePipeMock ],
+//       declarations: [ TableEditComponent, TranslatePipeMock ],
 //       providers: [
 //         { provide: TranslateService, useClass: TranslateServiceMock },
 //         { provide: MessageService, useClass: MessageService }
@@ -33,7 +33,7 @@
 //   });
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(TableListComponent);
+//     fixture = TestBed.createComponent(TableEditComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

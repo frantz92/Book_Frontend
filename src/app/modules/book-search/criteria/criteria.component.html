@@ -12,7 +12,7 @@
             appendTo="body"
           />
           <label for="bookTitle">
-            {{ "BOOK_MENU.HEADER.TITLE" | translate }}
+            {{ "BOOK.SEARCH.CRITERIA.TITLE" | translate }}
           </label>
         </span>
       </div>
@@ -28,7 +28,7 @@
             [showClear]="true"
           ></p-dropdown>
           <label for="bookCategory">
-            {{ "BOOK_MENU.HEADER.CATEGORY" | translate }}
+            {{ "BOOK.SEARCH.CRITERIA.CATEGORY" | translate }}
           </label>
         </span>
       </div>
@@ -43,7 +43,7 @@
           >
           </p-inputMask>
           <label for="bookIsbn">
-            {{ "BOOK_MENU.HEADER.ISBN" | translate }}
+            {{ "BOOK.SEARCH.CRITERIA.ISBN" | translate }}
           </label>
         </span>
       </div>
@@ -59,7 +59,7 @@
             formControlName="authorName"
           />
           <label for="authorName">
-            {{ "BOOK_MENU.HEADER.AUTHOR_NAME" | translate }}
+            {{ "BOOK.SEARCH.CRITERIA.AUTHOR_NAME" | translate }}
           </label>
         </span>
       </div>
@@ -73,7 +73,7 @@
             formControlName="authorSurame"
           />
           <label for="authorSurame">
-            {{ "BOOK_MENU.HEADER.AUTHOR_SURNAME" | translate }}
+            {{ "BOOK.SEARCH.CRITERIA.AUTHOR_SURNAME" | translate }}
           </label>
         </span>
       </div>
@@ -84,10 +84,10 @@
           <button
             pButton
             [label]="
-              ('BOOK_MENU.BOOK_SEARCH.CRITERIA.SEARCH' | translate) || true
+              ('BOOK.SEARCH.SEARCH_BTN' | translate) || true
             "
             [pTooltip]="
-              'BOOK_MENU.BOOK_SEARCH.CRITERIA.SEARCH_TOOLTIP' | translate
+              'BOOK.SEARCH.SEARCH_BTN_TOOLTIP' | translate
             "
             tooltipPosition="top"
             (click)="submitCriteria()"
@@ -98,10 +98,10 @@
           <button
             pButton
             [label]="
-              ('BOOK_MENU.BOOK_SEARCH.CRITERIA.RESET' | translate) || true
+              ('BOOK.SEARCH.RESET_BTN' | translate) || true
             "
             [pTooltip]="
-              'BOOK_MENU.BOOK_SEARCH.CRITERIA.RESET_TOOLTIP' | translate
+              'BOOK.SEARCH.RESET_BTN_TOOLTIP' | translate
             "
             tooltipPosition="top"
             (click)="resetFormGroup()"

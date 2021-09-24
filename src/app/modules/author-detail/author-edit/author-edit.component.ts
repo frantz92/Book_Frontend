@@ -1,62 +1,71 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { BreadcrumbService } from 'portal-lib';
 import { MessageService } from 'primeng/api';
 import {
-  CreateAuthorRequestParams,
   AuthorDTO,
   AuthorRESTAPIService,
+  UpdateAuthorRequestParams,
 } from '../../../generated';
 import { AuthorDetailFormComponent } from '../author-detail-form/author-detail-form.component';
 
 @Component({
-  selector: 'app-author-create',
-  templateUrl: './author-create.component.html',
-  styleUrls: ['./author-create.component.css'],
+  selector: 'app-author-edit',
+  templateUrl: './author-edit.component.html',
+  styleUrls: ['./author-edit.component.css'],
 })
-export class AuthorCreateComponent implements OnInit {
+export class AuthorEditComponent implements OnInit {
   @ViewChild(AuthorDetailFormComponent, { static: false })
   public authorDetailFormComponent: AuthorDetailFormComponent;
-  public helpArticleId = 'PAGE_AUTHOR_CREATE';
+  public helpArticleId = 'PAGE_AUTHOR_EDIT';
   public translatedData: Record<string, string>;
+  private readonly authorId: number;
 
   constructor(
-    private readonly authorRESTAPIService: AuthorRESTAPIService,
+    private readonly authorApi: AuthorRESTAPIService,
     private readonly translateService: TranslateService,
     private readonly messageService: MessageService,
+    private readonly route: ActivatedRoute,
     private readonly breadCrumbService: BreadcrumbService
-  ) {}
+  ) {
+    this.authorId = Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   ngOnInit(): void {
     this.translateService
       .get([
-        'AUTHOR.CREATE.SUCCESS',
-        'AUTHOR.CREATE.ERROR',
-        'AUTHOR.CREATE.HEADER',
+        'AUTHOR.EDIT.SUCCESS',
+        'AUTHOR.EDIT.ERROR',
+        'AUTHOR.EDIT.HEADER',
       ])
       .subscribe((data) => {
         this.translatedData = data;
         this.breadCrumbService.setItems([
           {
-            title: this.translatedData['AUTHOR.CREATE.HEADER'],
-            label: this.translatedData['AUTHOR.CREATE.HEADER'],
+            title: this.translatedData['AUTHOR.EDIT.HEADER'],
+            label: this.translatedData['AUTHOR.EDIT.HEADER'],
           },
         ]);
       });
   }
 
-  public onSubmit(authorDTO: AuthorDTO): void {
-    this.authorRESTAPIService.createAuthor({ authorDTO }).subscribe(
+  public onSumbit(data: AuthorDTO): void {
+    const params: UpdateAuthorRequestParams = {
+      id: this.authorId,
+      authorDTO: data,
+    };
+    this.authorApi.updateAuthor(params).subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
-          summary: this.translatedData['AUTHOR.CREATE.SUCCESS'],
+          summary: this.translatedData['AUTHOR.EDIT.SUCCESS'],
         });
       },
       () => {
         this.messageService.add({
           severity: 'error',
-          summary: this.translatedData['AUTHOR.CREATE.ERROR'],
+          summary: this.translatedData['AUTHOR.EDIT.ERROR'],
         });
       }
     );

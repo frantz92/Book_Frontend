@@ -31,7 +31,7 @@ import {
 export class BookDetailFormComponent implements OnInit {
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 
-  public jsonTranslatePrefix = 'BOOK_MENU.HEADER.';
+  public jsonTranslatePrefix = 'BOOK.FORM.';
 
   public editCreateFormGroup: FormGroup;
 
@@ -70,7 +70,7 @@ export class BookDetailFormComponent implements OnInit {
       .get([
         'GENERAL.YES',
         'GENERAL.NO',
-        'BOOK_MENU.BOOK_CREATE_EDIT.FORM_INVALID',
+        'BOOK.FORM.INVALID',
       ])
       .subscribe((data) => {
         this.translatedData = data;
@@ -106,12 +106,11 @@ export class BookDetailFormComponent implements OnInit {
         this.editCreateFormGroup.value,
         { bookTitle: { id: this.editCreateFormGroup.getRawValue().bookTitle } }
       );
-      //bookDTO.bookAuthor = this.authorFormComponent.authorForm.value;
       this.formSubmitted.emit(bookDTO);
     } else {
       this.messageService.add({
         severity: 'error',
-        summary: this.translatedData['BOOK_MENU.BOOK_CREATE_EDIT.FORM_INVALID'],
+        summary: this.translatedData['BOOK.FORM.INVALID'],
       });
     }
   }

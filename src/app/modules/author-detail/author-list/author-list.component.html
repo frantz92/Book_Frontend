@@ -63,16 +63,16 @@
   </p-table>
 </tk-portal-page>
 <p-dialog
-  header="{{ 'AUTHOR_MENU.DELETE.DELETE_HEADER' | translate }}"
+  header="{{ 'AUTHOR.DELETE.HEADER' | translate }}"
   [(visible)]="deleteDialogVisible"
   [baseZIndex]="10000"
 >
   <p>
-    {{ "AUTHOR_MENU.DELETE.MESSAGE" | translate }}
+    {{ "AUTHOR.DELETE.MESSAGE" | translate }}
   </p>
   <div><b>Id</b>: {{ getSelectedAuthor()?.id }}</div>
   <div>
-    <b>{{ "AUTHOR_MENU.HEADER.AUTHOR_SURNAME" | translate }}</b
+    <b>{{ "AUTHOR.FORM.SURNAME" | translate }}</b
     >: {{ getSelectedAuthor()?.authorSurname }}
   </div>
   <p-footer class="btn-text">

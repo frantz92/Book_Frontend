@@ -34,7 +34,7 @@
           icon="pi pi-pencil"
           pButton
           title="{{ 'GENERAL.EDIT' | translate }}"
-          [routerLink]="['/detail/edit/', results.id]"
+          [routerLink]="['/book/edit/', results.id]"
         ></button>
         <button
           class="p-mb-2 p-mr-2"
@@ -45,37 +45,16 @@
           (click)="deleteDialogVisible = true; setSelectedBook(results)"
         ></button>
       </td>
-      <!-- <ng-container *ngFor="let col of columns">
-        <td>
-          <div *ngIf="isDateColumn(col.field); else elseif1">
-            {{ results[col.field] | date: "MMM d, y, h:mm a" }}
-          </div>
-          <ng-template #elseif1>
-            <div *ngIf="col.field === 'canceled'; else elseif2">
-              {{(results[col.field] ===  true ? 'GENERAL.YES' : 'GENERAL.NO') | translate}}
-            </div>
-          </ng-template>
-          <ng-template #elseif2>
-            <div>
-              {{
-                col.field === "table"
-                  ? getAuthorId(results[col.field])
-                  : results[col.field]
-              }}
-            </div>
-          </ng-template>
-        </td>
-      </ng-container> -->
     </tr>
   </ng-template>
 </p-table>
 <p-dialog
-  header="{{ 'BOOK_MENU.BOOK_DELETE' | translate }}"
+  header="{{ 'BOOK.DELETE.HEADER' | translate }}"
   [(visible)]="deleteDialogVisible"
   [baseZIndex]="10000"
 >
   <p>
-    {{ "BOOK_MENU.BOOK_DELETE.MESSAGE" | translate }}
+    {{ "BOOK.DELETE.MESSAGE" | translate }}
   </p>
   <div><b>Id</b>: {{ getSelectedBook()?.id }}</div>
   <div><b>Name</b>: {{ getSelectedBook()?.name }}</div>

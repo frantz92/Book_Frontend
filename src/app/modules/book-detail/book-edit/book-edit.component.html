@@ -4,16 +4,14 @@
     icon="times"
     routerLink="/home"
   ></tk-toolbar-item>
-
   <tk-toolbar-item
-    title="{{ 'GENERAL.CREATE' | translate }}"
+    title="{{ 'GENERAL.SAVE' | translate }}"
     icon="save"
     (click)="this.bookDetailFormComponent.emitForm()"
   ></tk-toolbar-item>
 </ng-template>
-
 <tk-portal-page
-  [header]="'BOOK.CREATE.HEADER' | translate"
+  [header]="'BOOK.EDIT.HEADER' | translate"
   [leftToolbar]="leftToolbar"
 >
   <app-book-detail-form

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BookCreateComponent } from './book-create/book-create.component';
-//import { BookEditComponent } from './booking-edit/booking-edit.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 const routes: Routes = [
   { path: 'create', component: BookCreateComponent },
-  // { path: 'edit/:id', component: BookingEditComponent },
+  { path: 'edit', component: BookEditComponent },
   { path: '', component: BookCreateComponent },
 ];
 

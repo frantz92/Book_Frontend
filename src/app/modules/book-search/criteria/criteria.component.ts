@@ -40,7 +40,7 @@ export class CriteriaComponent implements OnInit {
       .get([
         'GENERAL.YES',
         'GENERAL.NO',
-        'BOOK_MENU.BOOK_SEARCH.CRITERIA.INVALID',
+        'BOOK.SEARCH.INVALID',
       ])
       .subscribe((data) => {
         this.translatedData = data;
@@ -58,7 +58,7 @@ export class CriteriaComponent implements OnInit {
     if (this.criteriaGroup.invalid) {
       this.messageService.add({
         severity: 'error',
-        summary: this.translatedData['BOOK_MENU.BOOK_SEARCH.CRITERIA.INVALID'],
+        summary: this.translatedData['BOOK.SEARCH.INVALID'],
       });
     } else {
       this.criteriaSubmitted.emit(this.criteriaGroup.value);
